@@ -26,7 +26,7 @@ public:
 
     void checkNum(std::string num) {
         for (auto& dig : num) {
-            if (!std::isdigit(dig)) throw "Ingresaste un valor no numerico";
+            if (!std::isdigit(dig) && dig != '-' ) throw "Ingresaste un valor no numerico";
         }
     }
 
@@ -43,11 +43,34 @@ public:
     void printNums() {
         std::cout << "Lista: ";
         for (int i = 0; i < this->nums.size(); i++) {
+            if (i == (nums.size() - 1)) {
+                std::cout << this->nums[i];
+                continue;
+            }
             std::cout << this->nums[i] << ", ";
         }
         std::cout << std::endl;
     }
 };
+
+char tryAgain() {
+    char opt;
+
+    do {
+        std::cout << "\nQuiere volver a intentarlo? (y/n): ";
+        std::cin >> opt;
+        opt = tolower(opt);
+        if (opt != 'y' && opt != 'n') {
+            std::cout << "Entrada no valida. Ingrese un valor correcto.\n";
+        }
+        else {
+            std::cin.ignore();
+            break;
+        }
+    } while (true);
+
+    return opt;
+}
 
 int main()
 {
@@ -57,7 +80,7 @@ int main()
 
     do{
         system("cls");
-        std::cout << "Ingresa la lista de numeros:";
+        std::cout << "Ingresa la lista de numeros separado por espacios:";
         std::getline(std::cin, str);
 
         try
@@ -71,12 +94,11 @@ int main()
             std::cout << err << '\n';
         }
 
-        std::cout << "Quiere volver a intentarlo? (y/n): ";
-        std::cin >> opt;
-        std::cin.ignore();
-    } while (opt != 'n' && opt != 'N');
+        opt = tryAgain();
+        
+    } while (opt != 'n');
 
-    std::cout << "Gracias por su estadia :)\n";
+    std::cout << "\nGracias por su estadia :)\n";
     system("pause");
     return 0;
 }
