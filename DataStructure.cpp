@@ -1,104 +1,37 @@
-// Examen Diagnostico
+#include<iostream>
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
-
-class Nums {
+class Factorial {
 private:
-    std::vector<int> nums;
+	int factor = 1;
 public:
-    Nums() {};
-
-    Nums(std::string str) {
-        std::stringstream ss(str);
-        std::string num;
-        while (ss >> num) {
-            this->checkNum(num);
-            this->nums.push_back(std::stoi(num));
-        }
-
-        if (this->nums.size() < 1) {
-            throw "La lista esta vacia";
-        }
-    };
-
-    void checkNum(std::string num) {
-        for (auto& dig : num) {
-            if (!std::isdigit(dig) && dig != '-' ) throw "Ingresaste un valor no numerico";
-        }
-    }
-
-    void sortNums() {
-        for (int i = 1; i < this->nums.size(); i++) {
-            for (int j = 0; j < this->nums.size() - 1; j++) {
-                if (this->nums[i] < this->nums[j]) {
-                    std::swap(this->nums[j], this->nums[i]);
-                }
-            }
-        }
-    }
-
-    void printNums() {
-        std::cout << "Lista: ";
-        for (int i = 0; i < this->nums.size(); i++) {
-            if (i == (nums.size() - 1)) {
-                std::cout << this->nums[i];
-                continue;
-            }
-            std::cout << this->nums[i] << ", ";
-        }
-        std::cout << std::endl;
-    }
+	Factorial() {};
+	Factorial(int);
+	void print(int);
 };
 
-char tryAgain() {
-    char opt;
-
-    do {
-        std::cout << "\nQuiere volver a intentarlo? (y/n): ";
-        std::cin >> opt;
-        opt = tolower(opt);
-        if (opt != 'y' && opt != 'n') {
-            std::cout << "Entrada no valida. Ingrese un valor correcto.\n";
-        }
-        else {
-            std::cin.ignore();
-            break;
-        }
-    } while (true);
-
-    return opt;
+Factorial::Factorial(int number) {
+	for (int i = 1; i <= number; i++) {
+		this->factor *= i;
+	}
 }
 
-int main()
-{
-    std::string str;
-    char opt;
-    Nums nums;
+void Factorial::print(int number) {
+	std::cout << "> El factorial de " << number << " es " << this->factor << "\n\n";
+}
 
-    do{
-        system("cls");
-        std::cout << "Ingresa la lista de numeros separado por espacios:";
-        std::getline(std::cin, str);
+int main() {
 
-        try
-        {
-            nums = Nums(str);
-            nums.sortNums();
-            nums.printNums();
-        }
-        catch (const char* err)
-        {
-            std::cout << err << '\n';
-        }
+	Factorial factor;
+	int number;
 
-        opt = tryAgain();
-        
-    } while (opt != 'n');
+	std::cout << "NOMBRE: Caculadora de Factorial\n";
+	std::cout << "DESCRIPCION: Programa que se encarga de calcular el factorial del numero dado por el usuario.\n\n";
+	std::cout << "Ingresa un numero entero: ";
+	std::cin >> number;
 
-    std::cout << "\nGracias por su estadia :)\n";
-    system("pause");
-    return 0;
+	factor = Factorial(number);
+	factor.print(number);
+
+	system("pause");
+	return 0;
 }
