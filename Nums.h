@@ -1,13 +1,15 @@
 #pragma once
+
 class Nums
 {
 public:
-	int* arr, * backup, size;
+	int* arr, size;
 	Nums();
-	bool isEmpty;
+	bool isSorted;
 	void set(int);
-	void sort(int);
-	void rollback();
+	void sort(int, int);
+	void search(int, int);
 	void print();
+	static void swap(int*, int*);
 };
 

@@ -19,23 +19,17 @@ void Program::setFill(char simbol) { this->fill = simbol; }
 void Program::menu() {
 	this->divLn();
 
-	this->textCenterLn("La Mezcladora Mezclada");
+	this->textCenterLn("Google pero más cool");
 
 	this->divLn();
 	this->blankLn();
 
-	this->textLn(3, "Elige un metodo de orden:");
+	this->textLn(3, "Elige un metodo de busqueda:");
 
 	this->blankLn();
 
-	this->textLn(3, "1.- Metodo Burbuja");
-	this->textLn(3, "2.- Metodo Selection");
-	this->textLn(3, "3.- Metodo Cocktail");
-	this->textLn(3, "4.- Metodo Several Unique");
-	this->textLn(3, "5.- Metodo Counting");
-	this->textLn(3, "6.- Metodo Insertion");
-	this->textLn(3, "7.- Metodo Quick");
-	this->textLn(3, "9.- Metodo Radix");
+	this->textLn(3, "1.- Metodo Binario");
+	this->textLn(3, "2.- Metodo Secuencial");
 
 	this->blankLn();
 
@@ -43,7 +37,7 @@ void Program::menu() {
 
 	this->blankLn();
 
-	this->textLn(3, "11.- Salir del Programa");
+	this->textLn(3, "3.- Salir del Programa");
 
 	this->blankLn();
 	this->divLn();
@@ -85,15 +79,30 @@ void Program::textLn(int padding, std::string text) {
 	std::cout << std::setw(padding) << std::left << "#" << text << std::setw(left) << std::right << "#" << "\n";
 }
 
-void Program::sortNums(Nums* nums, int method) {
-	if ((*nums).isEmpty) {
-		int n;
-		std::cout << "Ingresa el numero de elementos: ";
+void Program::searchNums(Nums* nums, int method) {
+	int n;
+
+	std::cout << "Ingresa el valor a buscar: ";
+	std::cin >> n;
+	std::cout << "\n";
+
+	(*nums).search(method, n);
+}
+
+void Program::setNums(Nums* nums) {
+	int n;
+
+	Program::header("Registro de Numeros");
+	while (true) {
+		std::cout << "Ingresa el total de numeros: ";
 		std::cin >> n;
-		(*nums).set(n);
-		(*nums).isEmpty = false;
+
+		if (n <= 0) {
+			std::cout << "El valor debe ser mayor o igual a 1\n";
+			continue;
+		}
+		break;
 	}
-	(*nums).sort(method);
-	std::cout << "\nLos elementos ya ordenados son: \n";
-	(*nums).print();
+	(*nums).set(n);
+	(*nums).sort(0, n - 1);
 }

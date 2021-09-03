@@ -9,75 +9,60 @@ int main() {
 	Program program(40, '=');
 	int n, opt;
 	char key;
-	do {
-		// Reset values
-		key = 'n';
-		if (!(nums.isEmpty)) { 
-			nums.rollback(); 
-		}
 
+	program.setNums(&nums);
+	system("cls");
+
+	do {
 		program.menu();
-		std::cout << "\n" << std::setw(3) << std::left << "" << "Ingresar Opcion: ";
-		std::cin >> opt;
+
+		while (true) {
+			std::cout << "\n" << std::setw(3) << std::left << "" << "Ingresar Opcion: ";
+			std::cin >> opt;
+			if (opt < 1 && opt > 3) {
+				std::cout << std::setw(3) << "" << "Opcion no disponible, intente de nuevo\n\n";
+				continue;
+			}
+			break;
+		}
 
 		system("cls");
 
 		switch (opt) {
 		case 1:
-			program.header("Metodo Burbuja"); // Correjir 
-			program.sortNums(&nums, opt);
+			program.header("Metodo Binario"); // Correjir 
+			std::cout << "\n";
+			nums.print();
+			std::cout << "\n";
+			program.searchNums(&nums, opt);
 			break;
 		case 2:
-			program.header("Metodo Selection");
-			program.sortNums(&nums, opt);
+			program.header("Metodo Secuencial");
+			std::cout << "\n";
+			nums.print();
+			std::cout << "\n";
+			program.searchNums(&nums, opt);
 			break;
 		case 3:
-			program.header("Metodo Cocktail");
-			program.sortNums(&nums, opt);
-			break;
-		case 4:
-			program.header("Metodo Several Unique");
-			program.sortNums(&nums, opt);
-			break;
-		case 5:
-			program.header("Metodo Counting"); 
-			program.sortNums(&nums, opt);
-			break;
-		case 6:
-			program.header("Metodo Bucket");
-			program.sortNums(&nums, opt);
-			break;
-		case 7:
-			program.header("Metodo Quick");
-			program.sortNums(&nums, opt);
-			break;
-		case 8:
-			program.header("Metodo Merge");
-			program.sortNums(&nums, opt);
-			break;
-		case 9:
-			program.header("Metodo Radix");
-			program.sortNums(&nums, opt);
-			break;
-		case 10:
-			program.header("Metodo Shell");
-			program.sortNums(&nums, opt);
-			break;
-		case 11:
 			key = 'n';
 			break;
 		}
-
-		if (opt != 11) {
-			std::cout << "Quieres intentar de nuevo? (y/n):";
-			std::cin >> key;
-			key = tolower(key);
+		if (opt != 3) {
+			while (true) {
+				std::cout << "\nQuiere intentarlo de nuevo? (y/n): ";
+				std::cin >> key;
+				key = tolower(key);
+				if (key != 'n' && key != 'y') {
+					std::cout << "Opcion no disponible, intente de nuevo\n";
+					continue;
+				}
+				break;
+			}
 		}
-
 		std::cin.ignore();
 		system("cls");
 
-	} while (key != 'n' && key == 'y');
+	} while (key != 'n');
 
 	program.header("Gracias por su visita!");
 

@@ -16,8 +16,9 @@ public:
 	void header(std::string);
 	void blankLn();
 	void divLn();
-	void sortNums(Nums*, int);
+	void searchNums(Nums*, int);
 	void textCenterLn(std::string);
 	void textLn(int, std::string);
+	void setNums(Nums*);
 };
 
